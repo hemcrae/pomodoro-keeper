@@ -1,10 +1,14 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
 const PORT = 8080;
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.status(200)
+})
 
 app.get('/entries', (req, res) => {
     res.status(200).send('Hello World, this is for entries')
