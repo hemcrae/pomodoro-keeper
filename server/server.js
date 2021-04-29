@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const mongoose = require('mongoose');
 const PORT = 8080;
+const db = require('./db');
+
+db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use(cors());
 app.use(express.json());
