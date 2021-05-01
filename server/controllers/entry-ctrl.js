@@ -40,5 +40,4 @@ createEntry = (req, res) => {
                 message: 'Error'
             })
         })
-
 }

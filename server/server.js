@@ -4,8 +4,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const PORT = 8080;
 const db = require('./db');
+const userRoutes = express.Router();
 
 db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log('Connection Successful')
+})
 
 app.use(cors());
 app.use(express.json());
