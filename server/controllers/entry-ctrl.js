@@ -1,43 +1,153 @@
 // bring in the Entry model 
 const { user } = require('../db');
+const mongoose = require('mongoose');
 const Entry = require('../db/models/entry-model');
 
-// function to create Entry 
-createEntry = (req, res) => {
+
+// function to GET entries
+getEntries = async (req, res) => {
+    try {
+        const entries = await Entry.find({})
+
+        return res.status(200).json({
+            success: true,
+            data: entries
+        })
+    } catch(error) {
+        res.status(500).send(error.message)
+    }
+}
+
+// function to GET an entry by ID
+getEntryById = async (req, res) => {
+    try { 
+        const id = mongoose.Types.ObjectId(req.params.id)
+        const entry = await Entry.findOne({_id: id})
+
+        if (!entry) {
+            return res.status(404).json({
+                success: false,
+                message: 'Entry not found'
+            })
+        } 
+        return res.status(200).json({
+            success: true, 
+            data: entry
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+// function to CREATE Entry 
+createEntry = async (req, res) => {
     const body = req.body
 
     // if not body send response
-    if (!body) { 
+    if (!body.name || !body.type) { 
         return res.status(400).json({
             success: false, 
             error: 'Missing fields'
         })
     }
 
-    const entry = new Entry(body)
-
-    if (!body) {
-        return res.status(400).json({
+    try {
+        const entry = new Entry(body)
+        await entry.save()
+        return res.status(200).json({
+            success: true,
+            message: 'Entry successful!',
+            data: {
+                ...entry.toObject()
+            }
+        })
+    } catch(error) {
+        return res.status(500).json({
             success: false,
-            error: 'error'
+            message: error.message
         })
     }
+}
 
-    entry 
-        .save()
-        // res for successful entry
-        .then(() => {
-            return res.status(200).json({
-                success: true,
-                id: user._id,
-                message: 'Entry successful!'
-            })
-        })
-        // res for failed entry
-        .catch(() => { 
-            return res.status(400).json({
+// function to UPDATE an existing entry
+updateEntry = async (req, res) => {
+    const body = req.body
+
+    try { 
+        const id = mongoose.Types.ObjectId(req.params.id)
+        const entry = await Entry.findOne({_id: id})
+
+        if (!entry) {
+            return res.status(404).json({
                 success: false,
-                message: 'Error'
+                message: 'Entry not found'
             })
+        } 
+
+        if (body.name) {
+            entry.name = body.name
+        }
+
+        if (body.type) {
+            entry.type = body.type
+        }
+
+        if (body.startTime) {
+            entry.startTime = body.startTime
+        }
+
+        if (body.endTime) {
+            entry.endTime = body.endTime
+        }
+
+        await entry.save()
+        return res.status(200).json({
+            success: true,
+            message: 'Entry successful!',
+            data: {
+                ...entry.toObject()
+            }
         })
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+// function to DELETE an entry
+deleteEntry = async (req, res) => {
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id)
+        const entry = await Entry.findOne({_id: id})
+
+        if (!entry) {
+            return res.status(404).json({
+                success: false,
+                message: 'Entry not found'
+            })
+        } 
+        await entry.remove()
+        return res.status(200).json({
+            success: true,
+            message: 'Entry removed!'
+        })
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+module.exports = {
+    getEntries,
+    getEntryById, 
+    createEntry, 
+    updateEntry, 
+    deleteEntry
 }
