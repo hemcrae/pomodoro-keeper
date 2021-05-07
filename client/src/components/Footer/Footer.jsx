@@ -1,8 +1,8 @@
 import React from 'react';
 import SwitchContainer from '../SwitchContainer/SwitchContainer';
 import IconButton from '@material-ui/core/IconButton';
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import InfoIcon from '@material-ui/icons/Info';
+import TimerButton from '../TimerButton/TimerButton'
 import './Footer.scss';
 
 const Footer = () => {
@@ -15,13 +15,13 @@ const Footer = () => {
                 <div className="footer__wrap-switch">
                     <IconButton>
                         <SwitchContainer />
-                        <InfoIcon fontSize='medium'/>
+                        <InfoIcon />
                     </IconButton>
                 </div>
             </div>
             <div className="footer__wrap-right">
                 <IconButton>
-                    <PlayCircleFilledIcon fontSize='large'/>
+                    <TimerButton />
                 </IconButton>
             </div>
         </footer>
