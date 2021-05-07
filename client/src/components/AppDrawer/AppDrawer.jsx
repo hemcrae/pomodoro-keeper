@@ -5,9 +5,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import TimerIcon from '@material-ui/icons/Timer';
+import TimerIcon from '@material-ui/icons/Timer'
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+
 
 const AppDrawer = ({isOpen, toggleDrawer}) => { 
 
@@ -22,19 +24,45 @@ const AppDrawer = ({isOpen, toggleDrawer}) => {
             open={isOpen}
             onClose={handleDrawerClose}
         >
+            <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon /> 
+                {/* <ChevronRightIcon /> */}
+            </IconButton>
             <List>
-                {['Timer', 'Tasks', 'Reports'].map((text) => (
-                <ListItem button key={text}>
-                    <ListItemText key={text} />
+                <ListItem>
+                    <IconButton>
+                        <TimerIcon />
+                    </IconButton>
+                    <ListItemText>
+                        Timer
+                    </ListItemText>
                 </ListItem>
-                ))}
+            </List>
+
+            <List>
+                <ListItem>
+                    <IconButton>
+                        <FormatListBulletedIcon />
+                    </IconButton>
+                    <ListItemText>
+                        Tasks
+                    </ListItemText>
+                </ListItem>
+            </List>
+
+            <List>
+                <ListItem>
+                    <IconButton>
+                        <ListAltIcon />
+
+                    </IconButton>
+                    <ListItemText>
+                        Reports
+                    </ListItemText>
+                </ListItem>
             </List>
             
             
-            {/* <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon /> 
-                <ChevronRightIcon />
-            </IconButton> */}
         </Drawer>
     )
 }

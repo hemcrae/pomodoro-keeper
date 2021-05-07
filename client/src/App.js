@@ -2,6 +2,7 @@ import './App.scss';
 import React from 'react';
 import Header from './components/Header/Header'
 import AppDrawer from './components/AppDrawer/AppDrawer';
+import Footer from './components/Footer/Footer';
 
 class App extends React.Component {
 
@@ -23,6 +24,7 @@ class App extends React.Component {
         isOpen={this.state.isDrawerOpen}
         toggleDrawer={() => this.toggleDrawer()}
       />
+      <Footer/>
       </>
     );
   }
