@@ -4,54 +4,37 @@ import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import './TimerButton.scss';
 import { IconButton } from '@material-ui/core';
 
-class TimerButton extends React.Component {
+const TimerButton = ({timer, startTimer, stopTimer}) => {
+    const isTimerOn = timer.startTime !== null
 
-    state = {
-        isTimerOn: false
-    }
-
-    startTimer() {
-        this.setState({
-            isTimerOn: true
-        })
-    }
-
-    stopTimer() {
-        this.setState({
-            isTimerOn: false
-        })
-    }
-
-    handleTimerChange = (event) => {
-        if (this.state.isTimerOn) {
-            this.stopTimer()
+    const handleTimerChange = (event) => {
+        if (isTimerOn) {
+            stopTimer()
         } else {
-            this.startTimer()
+            startTimer()
         }
     }
 
-    render () {
-        let buttonDynamicClass = 'timer__button--stop';
-        if (!this.state.isTimerOn) {
-            buttonDynamicClass = 'timer__button--start'
-        } 
+    let buttonDynamicClass = 'timer__button--stop';
+    if (!isTimerOn) {
+        buttonDynamicClass = 'timer__button--start'
+    } 
 
-        return (
-            <>
-                <div className="timer">
-                    <IconButton 
+    return (
+        <>
+            <div className="timer">
+                <IconButton 
                     className={`timer__button ${buttonDynamicClass}`}
-                    onClick={this.handleTimerChange}
-                    >
-                        {this.state.isTimerOn ? 
-                            <PauseCircleFilledIcon fontSize='large'/> 
-                            : 
-                            <PlayCircleFilledIcon fontSize='large'/>}
-                    </IconButton>
-                </div>
-            </>
-        )
-    }
+                    onClick={() => handleTimerChange()}
+                >
+                    {isTimerOn ? 
+                        <PauseCircleFilledIcon fontSize='large'/> 
+                        : 
+                        <PlayCircleFilledIcon fontSize='large'/>}
+                </IconButton>
+            </div>
+        </>
+    )  
 }
 
 

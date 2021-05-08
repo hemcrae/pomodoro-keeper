@@ -5,22 +5,26 @@ import InfoIcon from '@material-ui/icons/Info';
 import TimerButton from '../TimerButton/TimerButton'
 import './Footer.scss';
 
-const Footer = () => {
+const Footer = ({timer, setTaskName, setPomodoro,...timerProps}) => {
     return (
         <footer className="footer">
             <div className="footer__wrap-left">
-                <h2 className="footer__title">
-                    Task Name
-                </h2>
+                <input 
+                    className="footer__input" 
+                    value={timer.taskName} 
+                    placeholder="Task Name" 
+                    onChange={(event) => setTaskName(event.target.value)}/>
                 <div className="footer__wrap-switch">
                     <IconButton>
-                        <SwitchContainer />
+                        <SwitchContainer 
+                            timer={timer}
+                            setPomodoro={setPomodoro}/>
                         <InfoIcon />
                     </IconButton>
                 </div>
             </div>
             <div className="footer__wrap-right">
-                <TimerButton />
+                <TimerButton timer={timer} {...timerProps}/>
             </div>
         </footer>
     

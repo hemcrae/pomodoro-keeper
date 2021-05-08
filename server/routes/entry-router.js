@@ -1,6 +1,6 @@
 const express = require('express');
-const EntryCtrl = require('../controllers/entry-ctrl');
 const router = express.Router();
+const EntryCtrl = require('../controllers/entry-ctrl');
 const app = express();
 
 router.get('/', EntryCtrl.getEntries)
