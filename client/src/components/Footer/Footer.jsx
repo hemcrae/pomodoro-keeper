@@ -20,9 +20,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer__wrap-right">
-                <IconButton>
-                    <TimerButton />
-                </IconButton>
+                <TimerButton />
             </div>
         </footer>
     

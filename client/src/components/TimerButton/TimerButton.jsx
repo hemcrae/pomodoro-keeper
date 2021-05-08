@@ -9,16 +9,19 @@ class TimerButton extends React.Component {
     state = {
         isTimerOn: false
     }
+
     startTimer() {
         this.setState({
             isTimerOn: true
         })
     }
+
     stopTimer() {
         this.setState({
             isTimerOn: false
         })
     }
+
     handleTimerChange = (event) => {
         if (this.state.isTimerOn) {
             this.stopTimer()
@@ -33,9 +36,9 @@ class TimerButton extends React.Component {
                 <div className="timer">
                     <IconButton onClick={this.handleTimerChange}>
                         {this.state.isTimerOn ? 
-                            <PauseCircleFilledIcon /> 
+                            <PauseCircleFilledIcon fontSize='large'/> 
                             : 
-                            <PlayCircleFilledIcon />}
+                            <PlayCircleFilledIcon fontSize='large'/>}
                     </IconButton>
                 </div>
             </>
