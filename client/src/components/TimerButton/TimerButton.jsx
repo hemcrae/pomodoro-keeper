@@ -31,10 +31,18 @@ class TimerButton extends React.Component {
     }
 
     render () {
+        let buttonDynamicClass = 'timer__button--stop';
+        if (!this.state.isTimerOn) {
+            buttonDynamicClass = 'timer__button--start'
+        } 
+
         return (
             <>
                 <div className="timer">
-                    <IconButton onClick={this.handleTimerChange}>
+                    <IconButton 
+                    className={`timer__button ${buttonDynamicClass}`}
+                    onClick={this.handleTimerChange}
+                    >
                         {this.state.isTimerOn ? 
                             <PauseCircleFilledIcon fontSize='large'/> 
                             : 
