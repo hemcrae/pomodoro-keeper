@@ -7,14 +7,14 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
   <React.StrictMode>
-      <Auth0Provider
-        domain="dev-zb2jzg4h.us.auth0.com"
-        clientId="nne0x3G94QJyU5jRVsqyOrPLzO7HpEsJ"
-        redirectUri={window.location.origin}
-        audience="https://dev-zb2jzg4h.us.auth0.com/api/v2/"
-        scope="read:current_user update:current_user_metadata"
-      >
-      <App />
+    <Auth0Provider
+      domain="dev-zb2jzg4h.us.auth0.com"
+      clientId="nne0x3G94QJyU5jRVsqyOrPLzO7HpEsJ"
+      redirectUri={window.location.origin}
+      audience="https://dev-zb2jzg4h.us.auth0.com/api/v2/"
+      scope="read:current_user update:current_user_metadata"
+    >
+    <App />
     </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')
