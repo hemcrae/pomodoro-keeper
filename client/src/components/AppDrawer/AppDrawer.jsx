@@ -1,17 +1,19 @@
 import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import TimerIcon from '@material-ui/icons/Timer'
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import LockIcon from '@material-ui/icons/Lock'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+import { useAuth0 } from "@auth0/auth0-react";
+import './AppDrawer.scss'
 
-
-const AppDrawer = ({isOpen, toggleDrawer}) => { 
+const AppDrawer = ({isOpen, toggleDrawer}) => {
+    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
     const handleDrawerClose = () => {
         toggleDrawer();
@@ -24,45 +26,45 @@ const AppDrawer = ({isOpen, toggleDrawer}) => {
             open={isOpen}
             onClose={handleDrawerClose}
         >
-            <IconButton onClick={handleDrawerClose}>
+            <Button onClick={handleDrawerClose}>
                 <ChevronLeftIcon /> 
-                {/* <ChevronRightIcon /> */}
-            </IconButton>
+            </Button>
             <List>
-                <ListItem>
-                    <IconButton>
-                        <TimerIcon />
-                    </IconButton>
-                    <ListItemText>
+                {!isAuthenticated && (
+                    <ListItem className="drawer__list-item">
+                        <button className="drawer__link" onClick={() => loginWithRedirect()}>
+                            <AccountCircleIcon className="drawer__list-item-icon" />
+                            Login
+                        </button>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem className="drawer__list-item">
+                        <button className="drawer__link" onClick={() => logout()}>
+                            <LockIcon className="drawer__list-item-icon" />
+                            Logout
+                        </button>
+                    </ListItem>
+                )}
+                <ListItem className="drawer__list-item">
+                    <Link className="drawer__link" to="/timer">
+                        <TimerIcon className="drawer__list-item-icon" />
                         Timer
-                    </ListItemText>
+                    </Link>
                 </ListItem>
-            </List>
-
-            <List>
-                <ListItem>
-                    <IconButton>
+                {/* <ListItem>
+                    <Link to="">
                         <FormatListBulletedIcon />
-                    </IconButton>
-                    <ListItemText>
                         Tasks
-                    </ListItemText>
-                </ListItem>
-            </List>
-
-            <List>
-                <ListItem>
-                    <IconButton>
-                        <ListAltIcon />
-
-                    </IconButton>
-                    <ListItemText>
+                    </Link>
+                </ListItem> */}
+                <ListItem className="drawer__list-item">
+                    <Link className="drawer__link" to="/reports">
+                        <ListAltIcon className="drawer__list-item-icon" />
                         Reports
-                    </ListItemText>
+                    </Link>
                 </ListItem>
             </List>
-            
-            
         </Drawer>
     )
 }
