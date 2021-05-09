@@ -2,7 +2,7 @@ import React from 'react';
 import './Timer.scss';
 import Header from '../../components/Header/Header'
 import AppDrawer from '../../components/AppDrawer/AppDrawer';
-import Footer from '../../components/Footer/Footer';
+import TimerFooter from '../../components/TimerFooter/TimerFooter';
 
 const Timer = ({
     toggleDrawer, 
@@ -21,7 +21,7 @@ const Timer = ({
                 isOpen={isDrawerOpen}
                 toggleDrawer={toggleDrawer}
             />
-            <Footer 
+            <TimerFooter 
                 timer={timer}
                 startTimer={startTimer}
                 stopTimer={stopTimer}

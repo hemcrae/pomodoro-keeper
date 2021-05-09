@@ -1,7 +1,9 @@
 import './App.scss';
 import React from 'react';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
-import Timer from './pages/Timer/Timer'
+import Timer from './pages/Timer/Timer';
+import Home from './pages/Home/Home';
+import axios from 'axios';
 class App extends React.Component {
 
   state = {
@@ -15,20 +17,29 @@ class App extends React.Component {
   }
 
   startTimer() {
-    this.setState({
-      timer: {
-        ...this.state.timer,
-        startTime: new Date().toString()
-      }
+    axios.post(`http://localhost:8080/entries`)
+    .then(() => {
+      this.setState({
+        timer: {
+          ...this.state.timer,
+          startTime: new Date().toString()
+        }
+      })
     })
-  }
+    .catch((err) => {
+      console.log(err)
+  })
+}
 
   stopTimer() {
-    this.setState({
-      timer: {
-        ...this.state.timer,
-        startTime: null
-      }
+    axios.patch(`http://localhost:8080/entries`)
+    .then(() => {
+      this.setState({
+        timer: {
+          ...this.state.timer,
+          startTime: null
+        }
+      })
     })
   }
 
@@ -62,7 +73,16 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          
+          <Route 
+            exact path="/"
+            render={(routerProps) => (
+              <Home 
+                toggleDrawer={() => this.toggleDrawer()}
+                isDrawerOpen={this.state.isDrawerOpen}
+                {...routerProps}
+              />
+            )}
+          />
           <Route 
             exact path="/timer" 
             render={(routerProps) => (

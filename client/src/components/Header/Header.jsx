@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from '../../assets/Logo/Logo.svg';
+import { ReactComponent as LogoImg } from '../../assets/Logo/LogoImg.svg';
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,8 +14,9 @@ const Header = ({toggleDrawer}) => {
 
     return (
         <>
-            <AppBar className="header" position="fixed" color="transparent">
+            <AppBar className="header" position="sticky" color="transparent">
                 <Toolbar className="header__toolbar">
+                    <LogoImg />
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -24,7 +25,6 @@ const Header = ({toggleDrawer}) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Logo />
                 </Toolbar>
             </AppBar>
         </> 
