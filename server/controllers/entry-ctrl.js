@@ -6,8 +6,16 @@ const Entry = require('../db/models/entry-model');
 
 // function to GET entries
 getEntries = async (req, res) => {
+    const filter = {}
+
+    if (req.query.endTime) {
+        filter.endTime = req.query.endTime === "null" ? null : req.query.endTime
+    } else {
+        filter.endTime = {$ne:null}
+    }
+
     try {
-        const entries = await Entry.find({})
+        const entries = await Entry.find(filter)
 
         return res.status(200).json({
             success: true,

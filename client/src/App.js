@@ -49,6 +49,26 @@ const App = () => {
     }).catch((error) => {
       console.error(error)
     })
+
+    axios.get(`http://localhost:8080/entries?endTime=null`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then(({data}) => {
+      if (!data.data || !data.data.length) {
+        return
+      }
+
+      const entry = data.data[0]
+
+      setTimer({
+        id: entry._id,
+        startTime: entry.startTime,
+        taskName: entry.name,
+      })
+    }).catch((error) => {
+      console.error(error)
+    })
   }, [accessToken])
 
   function startTimer() {

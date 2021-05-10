@@ -14,6 +14,14 @@ const formatTime = (timer) => {
     return `${getHours}:${getMinutes}:${getSeconds}`
 }
 
+const getDiff = (startTime) => {
+    const unixNow = Date.now()
+    const unixStartTime = new Date(startTime).getTime()
+    const diff = Math.floor((unixNow - unixStartTime) / 1000)
+
+    return diff
+}
+
 const TimerFooter = ({timer, setTaskName, setPomodoro,...timerProps}) => {
 
     const [stopwatch, setStopwatch] = useState('0:00:00');
@@ -25,10 +33,13 @@ const TimerFooter = ({timer, setTaskName, setPomodoro,...timerProps}) => {
             return
         }
 
+        // set stopwatch initially (instant)
+        const diff = getDiff(timer.startTime)
+        setStopwatch(formatTime(diff))
+
+        // set stopwatch after 1 second, every 1 second
         const interval = setInterval(() => {
-            const unixNow = Date.now()
-            const unixStartTime = new Date(timer.startTime).getTime()
-            const diff = Math.floor((unixNow - unixStartTime) / 1000)
+            const diff = getDiff(timer.startTime)
             setStopwatch(formatTime(diff))
         }, 1000) 
         return () => {
