@@ -11,8 +11,8 @@ ReactDOM.render(
       domain="dev-zb2jzg4h.us.auth0.com"
       clientId="nne0x3G94QJyU5jRVsqyOrPLzO7HpEsJ"
       redirectUri={window.location.origin}
-      audience="https://dev-zb2jzg4h.us.auth0.com/api/v2/"
-      scope="read:current_user update:current_user_metadata"
+      audience="http://localhost:8080"
+      scope="read:entries write:entries"
     >
     <App />
     </Auth0Provider>
