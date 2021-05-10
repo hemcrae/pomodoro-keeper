@@ -10,9 +10,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     background-color: white;
     box-shadow: 0 -2px 5px rgba(#000000, 0.2);
+
 
     &__title { 
         font-size: 1.5rem;
@@ -22,5 +23,48 @@
 
     &__input {
         @include default-input-field;
+    }
+
+    &__wrap-switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include mobile {
+            justify-content: flex-start;
+        }
+    }
+
+    &__button {
+
+        @include tablet {
+            margin: 0 1rem !important;
+        }
+    }
+
+    &__info-icon { 
+        @include tablet {
+            margin: 0 1rem !important;
+        }
+    }
+
+    
+    &__wrap-left,
+    &__wrap-right { 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &__wrap-left { 
+        flex-direction: column;
+        
+        @include tablet { 
+            flex-direction: row;
+        }
+    }
+
+    &__counter { 
+        padding-right: 2rem;
     }
 }

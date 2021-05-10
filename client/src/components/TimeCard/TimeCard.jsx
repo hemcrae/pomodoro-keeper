@@ -5,11 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
-const format = [
-    { day: 'numeric' }, '-', { month: 'numeric' }, '-', { year: 'numeric' }, 
-    ' ',
-    { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
-]
+
 
 const timeFormat = [
     { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
@@ -61,23 +57,9 @@ const TimeCard = ({entries}) => {
         return acc
     }, {total: 0, entries: []})
 
-    // [
-    //     {_id: String, name: string, startTime: string, endTime: string}
-    //     ...
-    // ]
-
-    // {
-    //     total: number,
-    //     day: string,
-    //     formattedEntries: [
-    //         {_id: string, name: string, formattedStartTime: string, formattedEndTime: string, totalTime: string}
-    //         ...
-    //     ]
-    // }
-
     return (
         <>
-        <Card >
+        <Card className="card">
             <CardContent>
                 <div className="time-card">
                     <header className="time-card__wrap-top">

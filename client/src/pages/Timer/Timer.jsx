@@ -24,7 +24,15 @@ const Timer = ({
     stopTimer, 
     setPomodoro, 
     setTaskName
-    }) => {
+}) => {
+
+    const groupedTimeEntries = timeEntries.reduce((acc, entry) => {
+        const startTimeDate = new Date(entry.startTime)
+        const stringDate = formatDate(startTimeDate, [{ day: 'numeric' }, '-', { month: 'numeric' }, '-', { year: 'numeric' }])
+        acc[stringDate] = acc[stringDate] || []
+        acc[stringDate] = [...acc[stringDate], entry]
+        return acc
+    }, {})
 
     return (
         <>
@@ -33,8 +41,9 @@ const Timer = ({
                 isOpen={isDrawerOpen}
                 toggleDrawer={toggleDrawer}
             />
-            <TimeCard
-                entries={timeEntries} />
+            {groupedTimeEntries && Object.entries(groupedTimeEntries).map(([day, entries]) => (
+                <TimeCard key={day} entries={entries} />
+            ))}
             <TimerFooter 
                 timer={timer}
                 startTimer={startTimer}

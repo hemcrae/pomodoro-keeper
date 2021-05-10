@@ -56,12 +56,12 @@ const TimerFooter = ({timer, setTaskName, setPomodoro,...timerProps}) => {
                     placeholder="Task Name" 
                     onChange={(event) => setTaskName(event.target.value)}/>
                 <div className="TimerFooter__wrap-switch">
-                    <Button>
+                    <Button className="TimerFooter__button">
                         <SwitchContainer 
                             timer={timer}
                             setPomodoro={setPomodoro}/>
-                        <InfoIcon />
                     </Button>
+                    <InfoIcon className="FooterTimer__info-icon"/>
                 </div>
             </div>
             <div className="TimerFooter__wrap-right">

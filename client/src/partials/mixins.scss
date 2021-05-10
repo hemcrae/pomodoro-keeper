@@ -1,5 +1,11 @@
 @use './variables.scss' as *;
 
+@mixin mobile { 
+    @media (min-width: 320px){
+        @content;
+    }
+}
+
 @mixin tablet {
     @media (min-width: 768px) {
         @content;
@@ -92,7 +98,7 @@
     background-color: #fff;
     border: 1px solid $light-slate-grey;
     border-radius: 5px;
-    color: $light-grey;
+    color: $light-slate-grey;
     outline: none;
     padding-left: 0.75rem;
     
