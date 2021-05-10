@@ -1,0 +1,12 @@
+@use '../../partials/variables.scss' as *;
+@use '../../partials/mixins.scss' as *;
+
+.timeCard__wrap-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.timeCard__wrap-bottom {
+    display: flex;
+    justify-content: space-between;
+}

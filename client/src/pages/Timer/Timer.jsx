@@ -3,6 +3,7 @@ import './Timer.scss';
 import Header from '../../components/Header/Header'
 import AppDrawer from '../../components/AppDrawer/AppDrawer';
 import TimerFooter from '../../components/TimerFooter/TimerFooter';
+import TimeCard from '../../components/TimeCard/TimeCard';
 
 function formatDate (t, a) {
     return a.map((m) => {
@@ -47,6 +48,7 @@ const Timer = ({
                 </div>
                 )
             })}
+            <TimeCard />
             <TimerFooter 
                 timer={timer}
                 startTimer={startTimer}
