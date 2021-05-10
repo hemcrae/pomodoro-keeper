@@ -5,30 +5,102 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
-const TimeCard = () => {
+const format = [
+    { day: 'numeric' }, '-', { month: 'numeric' }, '-', { year: 'numeric' }, 
+    ' ',
+    { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
+]
+
+const timeFormat = [
+    { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
+]
+
+const formatTime = (timer) => {
+    const getSeconds = `0${(timer % 60)}`.slice(-2)
+    const minutes = `${Math.floor(timer / 60)}`
+    const getMinutes = `0${minutes % 60}`.slice(-2)
+    const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
+
+    return `${getHours}:${getMinutes}:${getSeconds}`
+}
+
+function formatDate (t, a) {
+    return a.map((m) => {
+        if (typeof m === 'string') {
+            return m;
+        }
+        let f = new Intl.DateTimeFormat('en', m);
+        return f.format(t);
+    }).join('');
+}
+
+const TimeCard = ({entries}) => {
+
+    const formattedEntries = entries.reduce((acc, entry) => {
+        const startTimeDate = new Date(entry.startTime)
+        const endTimeDate = new Date(entry.endTime)
+        const startTimeUnix = startTimeDate.getTime()
+        const endTimeUnix = endTimeDate.getTime()
+        const diff = Math.floor((endTimeUnix - startTimeUnix) / 1000);
+
+        if (!acc.day) {
+            acc.day = formatDate(startTimeDate, [{ dateStyle: 'full' }])
+        }
+
+        acc.total = acc.total + diff
+        acc.entries = [
+            ...acc.entries,
+            {
+                id: entry._id,
+                name: entry.name,
+                formattedStartTime: formatDate(startTimeDate, timeFormat),
+                formattedEndTime: formatDate(endTimeDate, timeFormat),
+                formattedTotal: formatTime(diff)
+            }
+        ]
+        return acc
+    }, {total: 0, entries: []})
+
+    // [
+    //     {_id: String, name: string, startTime: string, endTime: string}
+    //     ...
+    // ]
+
+    // {
+    //     total: number,
+    //     day: string,
+    //     formattedEntries: [
+    //         {_id: string, name: string, formattedStartTime: string, formattedEndTime: string, totalTime: string}
+    //         ...
+    //     ]
+    // }
 
     return (
         <>
-        <Card>
+        <Card >
             <CardContent>
-                <header className="timeCard__wrap-top">
-                    <h2 className="timeCard__header">
-                        Date
-                    </h2>
-                    <h2 className="timeCard__total-time">
-                        3:00
-                    </h2>
-                </header>
-                <div className="timeCard__wrap-bottom">
-                    <h2 className="timeCard__taskName">
-                        Task Name
-                    </h2>
-                    <h3 className="timeCard__hours">
-                        11:00 - 11:30
-                    </h3>
-                    <h3 className="timeCard__timer">
-                        0:30:00
-                    </h3>
+                <div className="time-card">
+                    <header className="time-card__wrap-top">
+                        <h2 className="time-card__header">
+                            {formattedEntries.day}
+                        </h2>
+                        <h2 className="time-card__total-time">
+                            {formatTime(formattedEntries.total)}
+                        </h2>
+                    </header>
+                    {formattedEntries.entries && formattedEntries.entries.map((entry) => (
+                        <div key={entry.id} className="time-card__entry">
+                            <h2 className="time-card__taskName">
+                                {entry.name}
+                            </h2>
+                            <h3 className="time-card__hours">
+                            {entry.formattedStartTime} - {entry.formattedEndTime}
+                            </h3>
+                            <h3 className="time-card__timer">
+                                {entry.formattedTotal}
+                            </h3>
+                        </div>
+                    ))}
                 </div>
             </CardContent>
         </Card>

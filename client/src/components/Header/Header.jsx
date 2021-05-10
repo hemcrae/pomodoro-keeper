@@ -14,7 +14,7 @@ const Header = ({toggleDrawer}) => {
 
     return (
         <>
-            <AppBar className="header" position="sticky" color="transparent">
+            <AppBar className="header" position="sticky" color="white">
                 <Toolbar className="header__toolbar">
                     <LogoImg />
                     <IconButton

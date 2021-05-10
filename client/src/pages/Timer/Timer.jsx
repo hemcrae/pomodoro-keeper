@@ -13,7 +13,7 @@ function formatDate (t, a) {
         let f = new Intl.DateTimeFormat('en', m);
         return f.format(t);
     }).join('');
- }
+}
 
 const Timer = ({
     timeEntries,
@@ -33,22 +33,8 @@ const Timer = ({
                 isOpen={isDrawerOpen}
                 toggleDrawer={toggleDrawer}
             />
-            {timeEntries && timeEntries.map(entry => {
-                const format = [
-                    { day: 'numeric' }, '-', { month: 'numeric' }, '-', { year: 'numeric' }, 
-                    ' ',
-                    { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
-                ]
-                const startTimeFormatted = formatDate(new Date(entry.startTime), format)
-                const endTimeFormatted = formatDate(new Date(entry.endTime), format)
-                return (
-                <div>
-                    {entry.name} <br />
-                    {startTimeFormatted} - {endTimeFormatted}
-                </div>
-                )
-            })}
-            <TimeCard />
+            <TimeCard
+                entries={timeEntries} />
             <TimerFooter 
                 timer={timer}
                 startTimer={startTimer}

@@ -1,12 +1,32 @@
 @use '../../partials/variables.scss' as *;
 @use '../../partials/mixins.scss' as *;
 
-.timeCard__wrap-top {
+.time-card {
     display: flex;
-    justify-content: space-between;
-}
+    flex-direction: column;
 
-.timeCard__wrap-bottom {
-    display: flex;
-    justify-content: space-between;
+    &__wrap-top,
+    &__entry {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__header,
+    &__total-time { 
+        @include subheader;
+        color: $space-cadet;
+    }
+
+    &__taskName,
+    &__timer {
+        @include labels-links-buttons;
+        color: $light-slate-grey;
+        font-weight: 400;
+    }
+
+    &__hours{
+        @include labels-links-buttons;
+        color: $light-grey;
+        font-weight: 400;
+    }
 }
