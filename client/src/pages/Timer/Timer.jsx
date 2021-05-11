@@ -23,7 +23,8 @@ const Timer = ({
     startTimer, 
     stopTimer, 
     setPomodoro, 
-    setTaskName
+    setTaskName,
+    openDialog
 }) => {
 
     const groupedTimeEntries = timeEntries.reduce((acc, entry) => {
@@ -50,6 +51,7 @@ const Timer = ({
                 stopTimer={stopTimer}
                 setPomodoro={setPomodoro}
                 setTaskName={setTaskName}
+                openDialog={openDialog}
             />
         </>
     )

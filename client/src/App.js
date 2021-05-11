@@ -7,15 +7,16 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import Reports from './pages/Reports/Reports';
 import PomodoroDialog from './components/PomodoroDialog/PomodoroDialog';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const App = () => {
 
   const { getAccessTokenSilently } = useAuth0();
 
   const [accessToken, setAccessToken] = useState('');
-
   const [timeEntries, setTimeEntries] = useState([]);
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [timer, setTimer] = useState({
     id: null,
     startTime: null, 
@@ -23,9 +24,6 @@ const App = () => {
     taskName: ''
   });
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
-  const [isDialogOpen, setIsDialogOpen] = useState(true);
   
   useEffect(() => {
     getAccessTokenSilently({
@@ -164,7 +162,7 @@ const App = () => {
               />
             )}
           />
-          <Route 
+          <PrivateRoute 
             exact path="/timer" 
             render={(routerProps) => (
               <Timer 
@@ -176,11 +174,12 @@ const App = () => {
                 stopTimer={stopTimer}
                 setPomodoro={setPomodoro}
                 setTaskName={setTaskName}
+                openDialog={openTimerDialog}
                 {...routerProps}
               />
             )}
           />
-          <Route 
+          <PrivateRoute 
             exact path="/reports"
             render={(routerProps) => (
               <Reports
@@ -191,6 +190,7 @@ const App = () => {
               stopTimer={stopTimer}
               setPomodoro={setPomodoro}
               setTaskName={setTaskName}
+              openDialog={openTimerDialog}
               {...routerProps}
               />
             )}

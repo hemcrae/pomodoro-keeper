@@ -11,8 +11,8 @@ const Reports = ({
     startTimer,
     stopTimer,
     setPomodoro,
-    setTaskName
-
+    setTaskName,
+    openDialog
 }) => {
     return (
         <>
@@ -27,6 +27,7 @@ const Reports = ({
                 stopTimer={stopTimer}
                 setPomodoro={setPomodoro}
                 setTaskName={setTaskName}
+                openDialog={openDialog}
             />
         </>
     )

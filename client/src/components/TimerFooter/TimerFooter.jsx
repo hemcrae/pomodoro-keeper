@@ -22,12 +22,13 @@ const getDiff = (startTime) => {
     return diff
 }
 
-const TimerFooter = ({timer, setTaskName, setPomodoro,...timerProps}) => {
+const breaks = [30, 60, 90, 120].sort((a, b) => a - b);
+
+const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}) => {
 
     const [stopwatch, setStopwatch] = useState('0:00:00');
 
     useEffect (() => {
-
         if (!timer.startTime) {
             setStopwatch('0:00:00')
             return
@@ -40,8 +41,14 @@ const TimerFooter = ({timer, setTaskName, setPomodoro,...timerProps}) => {
         // set stopwatch after 1 second, every 1 second
         const interval = setInterval(() => {
             const diff = getDiff(timer.startTime)
+            
+            if (breaks.some((sec) => diff === sec) && timer.pomodoro) {
+                openDialog()
+            }
+
             setStopwatch(formatTime(diff))
-        }, 1000) 
+        }, 1000)
+
         return () => {
             clearInterval(interval)
         }

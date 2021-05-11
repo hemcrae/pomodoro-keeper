@@ -39,31 +39,27 @@ const AppDrawer = ({isOpen, toggleDrawer}) => {
                     </ListItem>
                 )}
                 {isAuthenticated && (
-                    <ListItem className="drawer__list-item">
-                        <button className="drawer__link" onClick={() => logout()}>
-                            <LockIcon className="drawer__list-item-icon" />
-                            Logout
-                        </button>
-                    </ListItem>
+                    <>
+                        <ListItem className="drawer__list-item">
+                            <button className="drawer__link" onClick={() => logout()}>
+                                <LockIcon className="drawer__list-item-icon" />
+                                Logout
+                            </button>
+                        </ListItem>
+                        <ListItem className="drawer__list-item">
+                            <Link className="drawer__link" to="/timer">
+                                <TimerIcon className="drawer__list-item-icon" />
+                                Timer
+                            </Link>
+                        </ListItem>
+                        <ListItem className="drawer__list-item">
+                            <Link className="drawer__link" to="/reports">
+                                <ListAltIcon className="drawer__list-item-icon" />
+                                Reports
+                            </Link>
+                        </ListItem>
+                    </>
                 )}
-                <ListItem className="drawer__list-item">
-                    <Link className="drawer__link" to="/timer">
-                        <TimerIcon className="drawer__list-item-icon" />
-                        Timer
-                    </Link>
-                </ListItem>
-                {/* <ListItem>
-                    <Link to="">
-                        <FormatListBulletedIcon />
-                        Tasks
-                    </Link>
-                </ListItem> */}
-                <ListItem className="drawer__list-item">
-                    <Link className="drawer__link" to="/reports">
-                        <ListAltIcon className="drawer__list-item-icon" />
-                        Reports
-                    </Link>
-                </ListItem>
             </List>
         </Drawer>
     )
