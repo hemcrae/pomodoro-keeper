@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import Reports from './pages/Reports/Reports';
+import PomodoroDialog from './components/PomodoroDialog/PomodoroDialog';
 
 const App = () => {
 
@@ -22,9 +23,9 @@ const App = () => {
     taskName: ''
   });
 
-  const [state, setState] = useState({
-    isDrawerOpen: false,
-  })
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const [isDialogOpen, setIsDialogOpen] = useState(true);
   
   useEffect(() => {
     getAccessTokenSilently({
@@ -135,58 +136,72 @@ const App = () => {
   }
 
   function toggleDrawer() {
-    setState({
-      ...state,
-      isDrawerOpen: !state.isDrawerOpen 
-    })
+    setIsDrawerOpen(!isDrawerOpen)
+  }
+
+  function openTimerDialog() {
+    setIsDialogOpen(true)
+  }
+
+  function handleDialogClose(value) {
+    setIsDialogOpen(false)
+    if (value) {
+      stopTimer();
+    }
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route 
-          exact path="/"
-          render={(routerProps) => (
-            <Home 
+    <>
+      <BrowserRouter>
+        <Switch>
+          <Route 
+            exact path="/"
+            render={(routerProps) => (
+              <Home 
+                toggleDrawer={toggleDrawer}
+                isDrawerOpen={isDrawerOpen}
+                {...routerProps}
+              />
+            )}
+          />
+          <Route 
+            exact path="/timer" 
+            render={(routerProps) => (
+              <Timer 
+                timer={timer} 
+                timeEntries={timeEntries}
+                toggleDrawer={toggleDrawer}
+                isDrawerOpen={isDrawerOpen}
+                startTimer={startTimer}
+                stopTimer={stopTimer}
+                setPomodoro={setPomodoro}
+                setTaskName={setTaskName}
+                {...routerProps}
+              />
+            )}
+          />
+          <Route 
+            exact path="/reports"
+            render={(routerProps) => (
+              <Reports
               toggleDrawer={toggleDrawer}
-              isDrawerOpen={state.isDrawerOpen}
-              {...routerProps}
-            />
-          )}
-        />
-        <Route 
-          exact path="/timer" 
-          render={(routerProps) => (
-            <Timer 
-              timer={timer} 
-              timeEntries={timeEntries}
-              toggleDrawer={toggleDrawer}
-              isDrawerOpen={state.isDrawerOpen}
+              isDrawerOpen={isDrawerOpen}
+              timer={timer}
               startTimer={startTimer}
               stopTimer={stopTimer}
               setPomodoro={setPomodoro}
               setTaskName={setTaskName}
               {...routerProps}
+              />
+            )}
             />
-          )}
-        />
-        <Route 
-          exact path="/reports"
-          render={(routerProps) => (
-            <Reports
-            toggleDrawer={toggleDrawer}
-            isDrawerOpen={state.isDrawerOpen}
-            timer={timer}
-            startTimer={startTimer}
-            stopTimer={stopTimer}
-            setPomodoro={setPomodoro}
-            setTaskName={setTaskName}
-            {...routerProps}
-            />
-          )}
-          />
-      </Switch>
-    </BrowserRouter>
+        </Switch>
+      </BrowserRouter>
+      <PomodoroDialog 
+        open={isDialogOpen} 
+        onClose={handleDialogClose}
+      />
+    </>
   )
 }
 

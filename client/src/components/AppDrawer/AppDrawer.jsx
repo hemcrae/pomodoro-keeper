@@ -29,7 +29,7 @@ const AppDrawer = ({isOpen, toggleDrawer}) => {
             <Button onClick={handleDrawerClose}>
                 <ChevronLeftIcon /> 
             </Button>
-            <List>
+            <List onClick={handleDrawerClose}>
                 {!isAuthenticated && (
                     <ListItem className="drawer__list-item">
                         <button className="drawer__link" onClick={() => loginWithRedirect()}>

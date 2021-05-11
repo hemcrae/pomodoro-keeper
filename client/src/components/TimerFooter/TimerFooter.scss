@@ -66,8 +66,14 @@
 
     &__counter { 
         padding-right: 2rem;
-        @include header;
-        color: $space-cadet;
+        font-family: $roboto;
+        font-weight: 300;
+        color: $light-slate-grey;
         
     }
+
+    // &-shadow {
+    //     height: 100px;
+    //     width: 100%;
+    // }
 }

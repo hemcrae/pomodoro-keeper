@@ -1,0 +1,13 @@
+@use '../../partials/variables.scss' as *;
+@use '../../partials/mixins.scss' as *;
+
+.dialog__header {
+    @include subheader;
+    color: $space-cadet;
+    padding: 1rem 0;
+}
+
+.dialog__text {
+    @include med-text;
+    color: $space-cadet;
+}

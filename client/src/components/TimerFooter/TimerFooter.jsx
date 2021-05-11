@@ -48,29 +48,33 @@ const TimerFooter = ({timer, setTaskName, setPomodoro,...timerProps}) => {
     }, [timer.startTime])
 
     return (
-        <footer className="TimerFooter">
-            <div className="TimerFooter__wrap-left">
-                <input 
-                    className="TimerFooter__input" 
-                    value={timer.taskName} 
-                    placeholder="Task Name" 
-                    onChange={(event) => setTaskName(event.target.value)}/>
-                <div className="TimerFooter__wrap-switch">
-                    <Button className="TimerFooter__button">
-                        <SwitchContainer 
-                            timer={timer}
-                            setPomodoro={setPomodoro}/>
-                    </Button>
-                    <InfoIcon className="FooterTimer__info-icon"/>
+        <>
+            <footer className="TimerFooter">
+                <div className="TimerFooter__wrap-left">
+                    <input 
+                        className="TimerFooter__input" 
+                        value={timer.taskName} 
+                        placeholder="Task Name" 
+                        onChange={(event) => setTaskName(event.target.value)}/>
+                    <div className="TimerFooter__wrap-switch">
+                        <Button className="TimerFooter__button">
+                            <SwitchContainer 
+                                timer={timer}
+                                setPomodoro={setPomodoro}/>
+                        </Button>
+                        <InfoIcon className="FooterTimer__info-icon"/>
+                    </div>
                 </div>
-            </div>
-            <div className="TimerFooter__wrap-right">
-                <h2 className="TimerFooter__counter">
-                    {stopwatch}
-                </h2>
-                <TimerButton timer={timer} {...timerProps}/>
-            </div>
-        </footer>
+                <div className="TimerFooter__wrap-right">
+                    <h2 className="TimerFooter__counter">
+                        {stopwatch}
+                    </h2>
+                    <TimerButton timer={timer} {...timerProps}/>
+                </div>
+            </footer>
+            {/* <div className="TimeFooter-shadow">
+            </div> */}
+        </>
     
     )
 
