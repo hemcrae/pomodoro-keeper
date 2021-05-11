@@ -3,7 +3,7 @@
 
 
 .TimerFooter {
-    position: fixed;
+    position: sticky;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,8 +72,4 @@
         
     }
 
-    // &-shadow {
-    //     height: 100px;
-    //     width: 100%;
-    // }
 }

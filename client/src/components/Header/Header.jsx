@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import './Header.scss';
+import { Link } from 'react-router-dom';
 
 const Header = ({toggleDrawer}) => {
 
@@ -16,7 +17,9 @@ const Header = ({toggleDrawer}) => {
         <>
             <AppBar className="header" position="sticky" color="white">
                 <Toolbar className="header__toolbar">
-                    <LogoImg />
+                    <Link to="/timer">
+                        <LogoImg />
+                    </Link>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"

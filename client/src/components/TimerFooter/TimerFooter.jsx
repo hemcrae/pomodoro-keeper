@@ -52,7 +52,7 @@ const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}
         return () => {
             clearInterval(interval)
         }
-    }, [timer.startTime])
+    }, [timer.startTime, timer.pomodoro, openDialog])
 
     return (
         <>
@@ -79,8 +79,6 @@ const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}
                     <TimerButton timer={timer} {...timerProps}/>
                 </div>
             </footer>
-            {/* <div className="TimeFooter-shadow">
-            </div> */}
         </>
     
     )
