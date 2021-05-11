@@ -1,9 +1,9 @@
 import React from 'react';
 import './TimeCard.scss';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 
 
@@ -60,31 +60,33 @@ const TimeCard = ({entries}) => {
     return (
         <>
         <Card className="card">
-            <CardContent>
-                <div className="time-card">
-                    <header className="time-card__wrap-top">
-                        <h2 className="time-card__header">
-                            {formattedEntries.day}
-                        </h2>
-                        <h2 className="time-card__total-time">
-                            {formatTime(formattedEntries.total)}
-                        </h2>
-                    </header>
-                    {formattedEntries.entries && formattedEntries.entries.map((entry) => (
-                        <div key={entry.id} className="time-card__entry">
-                            <h2 className="time-card__taskName">
-                                {entry.name}
+            <CardActionArea>
+                <CardContent>
+                    <div className="time-card">
+                        <header className="time-card__wrap-top">
+                            <h2 className="time-card__header">
+                                {formattedEntries.day}
                             </h2>
-                            <h3 className="time-card__hours">
-                            {entry.formattedStartTime} - {entry.formattedEndTime}
-                            </h3>
-                            <h3 className="time-card__timer">
-                                {entry.formattedTotal}
-                            </h3>
-                        </div>
-                    ))}
-                </div>
-            </CardContent>
+                            <h2 className="time-card__total-time">
+                                {formatTime(formattedEntries.total)}
+                            </h2>
+                        </header>
+                        {formattedEntries.entries && formattedEntries.entries.map((entry) => (
+                            <div key={entry.id} className="time-card__entry">
+                                <h2 className="time-card__taskName">
+                                    {entry.name}
+                                </h2>
+                                <h3 className="time-card__hours">
+                                {entry.formattedStartTime} - {entry.formattedEndTime}
+                                </h3>
+                                <h3 className="time-card__timer">
+                                    {entry.formattedTotal}
+                                </h3>
+                            </div>
+                        ))}
+                    </div>
+                </CardContent>
+            </CardActionArea>
         </Card>
         </>
     ) 

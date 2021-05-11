@@ -5,6 +5,7 @@ import Timer from './pages/Timer/Timer';
 import Home from './pages/Home/Home';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
+import Reports from './pages/Reports/Reports';
 
 const App = () => {
 
@@ -169,6 +170,21 @@ const App = () => {
             />
           )}
         />
+        <Route 
+          exact path="/reports"
+          render={(routerProps) => (
+            <Reports
+            toggleDrawer={toggleDrawer}
+            isDrawerOpen={state.isDrawerOpen}
+            timer={timer}
+            startTimer={startTimer}
+            stopTimer={stopTimer}
+            setPomodoro={setPomodoro}
+            setTaskName={setTaskName}
+            {...routerProps}
+            />
+          )}
+          />
       </Switch>
     </BrowserRouter>
   )

@@ -66,5 +66,8 @@
 
     &__counter { 
         padding-right: 2rem;
+        @include header;
+        color: $space-cadet;
+        
     }
 }
