@@ -186,6 +186,7 @@ const App = () => {
               toggleDrawer={toggleDrawer}
               isDrawerOpen={isDrawerOpen}
               timer={timer}
+              timeEntries={timeEntries}
               startTimer={startTimer}
               stopTimer={stopTimer}
               setPomodoro={setPomodoro}

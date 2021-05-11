@@ -22,7 +22,7 @@ const getDiff = (startTime) => {
     return diff
 }
 
-const breaks = [30, 60, 90, 120].sort((a, b) => a - b);
+const breaks = [15, 30, 60, 90, 120].sort((a, b) => a - b);
 
 const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}) => {
 
