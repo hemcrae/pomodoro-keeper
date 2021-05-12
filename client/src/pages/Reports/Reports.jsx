@@ -1,22 +1,13 @@
 import React from 'react';
-import AppDrawer from '../../components/AppDrawer/AppDrawer';
-import Header from '../../components/Header/Header';
-import TimerFooter from '../../components/TimerFooter/TimerFooter';
+import { TimerFooter } from '../../components/TimerFooter/TimerFooter';
 import './Reports.scss';
 import { Bar } from 'react-chartjs-2';
-import TimeCard from '../../components/TimeCard/TimeCard';
+import { TimeCard } from '../../components/TimeCard/TimeCard';
+import { formatDate } from '../../utils/time.utils';
+import { AppDrawer } from '../../components/AppDrawer/AppDrawer';
+import { Header } from '../../components/Header/Header';
 
-function formatDate (t, a) {
-    return a.map((m) => {
-        if (typeof m === 'string') {
-            return m;
-        }
-        let f = new Intl.DateTimeFormat('en', m);
-        return f.format(t);
-    }).join('');
-}
-
-const Reports = ({
+export const Reports = ({
     toggleDrawer,
     isDrawerOpen,
     timer,
@@ -52,7 +43,7 @@ const Reports = ({
         datasets: [
             {
                 label: 'Hours',
-                data: Object.values(totalObject).map(sec => sec / 60 / 60),
+                data: Object.values(totalObject).map(sec => sec / 60 / 60 ),
                 borderWidth: 1,
             },
         ],
@@ -71,9 +62,9 @@ const Reports = ({
                         yAxes: [{
                             type: 'time',
                             time: {
-                                unit: 'second',
+                                unit: 'hour',
                                 displayFormats: {
-                                    hour: 'HH:mm:ss'
+                                    hour: 'HH:MM:ss'
                                 }
                             }
                         }],
@@ -94,5 +85,3 @@ const Reports = ({
         </>
     )
 }
-
-export default Reports;

@@ -1,15 +1,16 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Timer from './pages/Timer/Timer';
-import Home from './pages/Home/Home';
+import { Timer } from './pages/Timer/Timer';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
-import Reports from './pages/Reports/Reports';
-import PomodoroDialog from './components/PomodoroDialog/PomodoroDialog';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import { Reports } from './pages/Reports/Reports';
+import { Home } from './pages/Home/Home';
+import { PomodoroDialog } from './components/PomodoroDialog/PomodoroDialog';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 
-const App = () => {
+
+export const App = () => {
 
   const { getAccessTokenSilently } = useAuth0();
 
@@ -162,7 +163,7 @@ const App = () => {
               />
             )}
           />
-          <PrivateRoute 
+          <PrivateRoute
             exact path="/timer" 
             render={(routerProps) => (
               <Timer 
@@ -198,12 +199,10 @@ const App = () => {
             />
         </Switch>
       </BrowserRouter>
-      <PomodoroDialog 
+      <PomodoroDialog
         open={isDialogOpen} 
         onClose={handleDialogClose}
       />
     </>
   )
 }
-
-export default App;

@@ -2,33 +2,14 @@ import React from 'react';
 import './TimeCard.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import { formatDate, formatTime } from '../../utils/time.utils';
 
 const timeFormat = [
     { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
 ]
 
-const formatTime = (timer) => {
-    const getSeconds = `0${(timer % 60)}`.slice(-2)
-    const minutes = `${Math.floor(timer / 60)}`
-    const getMinutes = `0${minutes % 60}`.slice(-2)
-    const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
-
-    return `${getHours}:${getMinutes}:${getSeconds}`
-}
-
-function formatDate (t, a) {
-    return a.map((m) => {
-        if (typeof m === 'string') {
-            return m;
-        }
-        let f = new Intl.DateTimeFormat('en', m);
-        return f.format(t);
-    }).join('');
-}
-
-const TimeCard = ({entries}) => {
+export const TimeCard = ({entries}) => {
 
     const formattedEntries = entries.reduce((acc, entry) => {
         const startTimeDate = new Date(entry.startTime)
@@ -89,5 +70,3 @@ const TimeCard = ({entries}) => {
         </>
     ) 
 }
-
-export default TimeCard;

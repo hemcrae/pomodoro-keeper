@@ -1,21 +1,12 @@
 import React from 'react';
 import './Timer.scss';
-import Header from '../../components/Header/Header'
-import AppDrawer from '../../components/AppDrawer/AppDrawer';
-import TimerFooter from '../../components/TimerFooter/TimerFooter';
-import TimeCard from '../../components/TimeCard/TimeCard';
+import { TimerFooter } from '../../components/TimerFooter/TimerFooter';
+import { TimeCard } from '../../components/TimeCard/TimeCard';
+import { formatDate } from '../../utils/time.utils';
+import { AppDrawer } from '../../components/AppDrawer/AppDrawer';
+import { Header } from '../../components/Header/Header';
 
-function formatDate (t, a) {
-    return a.map((m) => {
-        if (typeof m === 'string') {
-            return m;
-        }
-        let f = new Intl.DateTimeFormat('en', m);
-        return f.format(t);
-    }).join('');
-}
-
-const Timer = ({
+export const Timer = ({
     timeEntries,
     toggleDrawer, 
     isDrawerOpen, 
@@ -56,6 +47,4 @@ const Timer = ({
         </>
     )
 }
-
-export default Timer;
 

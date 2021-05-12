@@ -1,7 +1,4 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
-import AppDrawer from '../../components/AppDrawer/AppDrawer';
-import PageFooter from '../../components/PageFooter/PageFooter';
 import './Home.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,9 +6,11 @@ import TimerIcon from '@material-ui/icons/Timer'
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle' 
 import { useAuth0 } from "@auth0/auth0-react";
+import { AppDrawer } from '../../components/AppDrawer/AppDrawer';
+import { Header } from '../../components/Header/Header';
 
 
-const Home = ({
+export const Home = ({
     toggleDrawer, 
     isDrawerOpen
     }) => {
@@ -64,9 +63,6 @@ const Home = ({
                     )}
                 </div>
             </section>
-            <PageFooter />
         </>
     )
 }
-
-export default Home;

@@ -4,7 +4,7 @@ import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import './TimerButton.scss';
 import { IconButton } from '@material-ui/core';
 
-const TimerButton = ({timer, startTimer, stopTimer}) => {
+export const TimerButton = ({timer, startTimer, stopTimer}) => {
     const isTimerOn = timer.startTime !== null
 
     const handleTimerChange = (event) => {
@@ -36,6 +36,3 @@ const TimerButton = ({timer, startTimer, stopTimer}) => {
         </>
     )  
 }
-
-
-export default TimerButton;

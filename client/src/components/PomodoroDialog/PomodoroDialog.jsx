@@ -5,7 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import { Button, DialogContent } from '@material-ui/core';
 
 
-const PomodoroDialog = ({open, onClose}) => {
+export const PomodoroDialog = ({open, onClose}) => {
     return (
         <Dialog 
             open={open}
@@ -30,5 +30,3 @@ const PomodoroDialog = ({open, onClose}) => {
         </Dialog>
     )
 }
-
-export default PomodoroDialog;

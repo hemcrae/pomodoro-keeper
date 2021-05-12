@@ -7,7 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 
-const Header = ({toggleDrawer}) => {
+export const Header = ({toggleDrawer}) => {
 
     const handleDrawerOpen = () => {
         toggleDrawer();
@@ -33,5 +33,3 @@ const Header = ({toggleDrawer}) => {
         </> 
     )
 }
-
-export default Header;

@@ -1,30 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import SwitchContainer from '../SwitchContainer/SwitchContainer';
+import { SwitchContainer } from '../SwitchContainer/SwitchContainer';
 import Button from '@material-ui/core/Button';
 import InfoIcon from '@material-ui/icons/Info';
-import TimerButton from '../TimerButton/TimerButton'
+import { TimerButton } from '../TimerButton/TimerButton'
 import './TimerFooter.scss';
+import { formatTime, getTimeDiffInSec } from '../../utils/time.utils';
 
-const formatTime = (timer) => {
-    const getSeconds = `0${(timer % 60)}`.slice(-2)
-    const minutes = `${Math.floor(timer / 60)}`
-    const getMinutes = `0${minutes % 60}`.slice(-2)
-    const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
-
-    return `${getHours}:${getMinutes}:${getSeconds}`
-}
-
-const getDiff = (startTime) => {
-    const unixNow = Date.now()
-    const unixStartTime = new Date(startTime).getTime()
-    const diff = Math.floor((unixNow - unixStartTime) / 1000)
-
-    return diff
-}
-
+// set for demo, change to 25 minutes after demos
 const breaks = [15, 30, 60, 90, 120].sort((a, b) => a - b);
 
-const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}) => {
+export const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}) => {
 
     const [stopwatch, setStopwatch] = useState('0:00:00');
 
@@ -35,12 +20,12 @@ const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}
         }
 
         // set stopwatch initially (instant)
-        const diff = getDiff(timer.startTime)
+        const diff = getTimeDiffInSec(timer.startTime)
         setStopwatch(formatTime(diff))
 
         // set stopwatch after 1 second, every 1 second
         const interval = setInterval(() => {
-            const diff = getDiff(timer.startTime)
+            const diff = getTimeDiffInSec(timer.startTime)
             
             if (breaks.some((sec) => diff === sec) && timer.pomodoro) {
                 openDialog()
@@ -80,9 +65,5 @@ const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}
                 </div>
             </footer>
         </>
-    
     )
-
 }
-
-export default TimerFooter;
