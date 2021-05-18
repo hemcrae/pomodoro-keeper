@@ -7,18 +7,36 @@ import { formatDate } from '../../utils/time.utils';
 import { AppDrawer } from '../../components/AppDrawer/AppDrawer';
 import { Header } from '../../components/Header/Header';
 
-export const Reports = ({
-    toggleDrawer,
-    isDrawerOpen,
-    timer,
+interface Timer {
+    startTime: string
+    pomodoro: boolean
+    taskName: string
+}
+
+interface ReportsProps {
+    timer: Timer
+    toggleDrawer: () => void
+    isDrawerOpen: boolean
+    startTimer: () => void
+    stopTimer: () => void
+    setPomodoro: () => void
+    setTaskName: () => void 
+    openDialog: () => void
+    timeEntries: () => void
+}
+
+export const Reports: React.FC<ReportsProps> = ({ 
+    toggleDrawer, 
+    isDrawerOpen, 
+    timer, 
     startTimer,
     stopTimer,
     setPomodoro,
-    setTaskName,
+    setTaskName, 
     openDialog,
     timeEntries
 }) => {
-    
+
     const totalObject = timeEntries.reduce((acc, entry) => {
         const startTimeDate = new Date(entry.startTime)
         const endTimeDate = new Date(entry.endTime)
@@ -30,7 +48,7 @@ export const Reports = ({
         acc[stringDate] = acc[stringDate] + diff
         return acc
     }, {})
-
+        
     const groupedTimeEntries = timeEntries.reduce((acc, entry) => {
         const startTimeDate = new Date(entry.startTime)
         const stringDate = formatDate(startTimeDate, [{ day: 'numeric' }, '-', { month: 'numeric' }, '-', { year: 'numeric' }])
@@ -38,7 +56,7 @@ export const Reports = ({
         acc[stringDate] = [...acc[stringDate], entry]
         return acc
     }, {})
-
+        
     const data = {
         labels: Object.keys(totalObject),
         datasets: [
@@ -50,7 +68,7 @@ export const Reports = ({
             },
         ],
     };
-    
+        
     return (
         <>
             <Header toggleDrawer={toggleDrawer}/>

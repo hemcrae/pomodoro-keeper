@@ -6,10 +6,33 @@ import { TimerButton } from '../TimerButton/TimerButton'
 import './TimerFooter.scss';
 import { formatTime, getTimeDiffInSec } from '../../utils/time.utils';
 
+
+interface Timer {
+    startTime: string
+    pomodoro: boolean
+    taskName: string
+    endTime: string
+}
+
+interface TimerFooterProps {
+    timer: Timer
+    setPomodoro: (active: boolean) => void
+    setTaskName: (name: string) => void
+    openDialog: () => void
+    startTimer: () => void
+    stopTimer: () => void
+}
+
 // set for demo, change to 25 minutes after demos
 const breaks = [10, 30, 60, 90, 120].sort((a, b) => a - b);
 
-export const TimerFooter = ({timer, setTaskName, setPomodoro, openDialog,...timerProps}) => {
+export const TimerFooter: React.FC<TimerFooterProps> = ({
+    timer, 
+    setTaskName, 
+    setPomodoro, 
+    openDialog,
+    ...timerProps
+}) => {
 
     const [stopwatch, setStopwatch] = useState('0:00:00');
 

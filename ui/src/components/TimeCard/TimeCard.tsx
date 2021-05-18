@@ -5,13 +5,40 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { formatDate, formatTime } from '../../utils/time.utils';
 
+interface MongoEntry { 
+    _id: string
+    name: string
+    startTime: string
+    endTime: string
+}
+
+interface FormattedEntry {
+    id: string
+    name: string
+    formattedStartTime: string
+    formattedEndTime: string
+    formattedTotal: string
+}
+
+interface EntriesProps { 
+    entries: MongoEntry[]
+}
+
+interface FormattedEntriesObject {
+    total: number
+    entries: FormattedEntry[]
+    day?: string
+} 
+
 const timeFormat = [
     { hour: 'numeric', hour12: false, }, ':', { minute: 'numeric' }, ':', {second: 'numeric'}
 ]
 
-export const TimeCard = ({entries}) => {
+export const TimeCard: React.FC<EntriesProps> = ({
+    entries
+}) => {
 
-    const formattedEntries = entries.reduce((acc, entry) => {
+    const formattedEntries = entries.reduce((acc: FormattedEntriesObject, entry) => {
         const startTimeDate = new Date(entry.startTime)
         const endTimeDate = new Date(entry.endTime)
         const startTimeUnix = startTimeDate.getTime()
@@ -45,7 +72,7 @@ export const TimeCard = ({entries}) => {
                     <div className="time-card">
                         <header className="time-card__wrap-top">
                             <h2 className="time-card__header">
-                                {formattedEntries.day}
+                                {formattedEntries.day || ''}
                             </h2>
                             <h2 className="time-card__total-time">
                                 {formatTime(formattedEntries.total)}
