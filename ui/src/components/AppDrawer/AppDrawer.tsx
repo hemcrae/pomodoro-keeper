@@ -12,7 +12,16 @@ import { Button } from '@material-ui/core';
 import { useAuth0 } from "@auth0/auth0-react";
 import './AppDrawer.scss'
 
-export const AppDrawer = ({isOpen, toggleDrawer}) => {
+interface AppDrawerProps {
+    isOpen: boolean
+    toggleDrawer: () => void
+}
+
+export const AppDrawer: React.FC<AppDrawerProps> = ({
+    isOpen, 
+    toggleDrawer
+}) => {
+
     const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
     const handleDrawerClose = () => {

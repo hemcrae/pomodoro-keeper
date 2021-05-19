@@ -2,8 +2,8 @@
 @use '../../partials/variables.scss' as *;
 
 .header {
-
-    &__toolbar { 
-        justify-content: space-between;
-    }
+  background-color: white !important;
+  &__toolbar {
+    justify-content: space-between;
+  }
 }
