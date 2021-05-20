@@ -46,7 +46,6 @@ export const TimeCard: React.FC<EntriesProps> = ({ entries }) => {
       const startTimeUnix = startTimeDate.getTime();
       const endTimeUnix = endTimeDate.getTime();
       const diff = Math.floor((endTimeUnix - startTimeUnix) / 1000);
-      console.log(diff);
 
       if (!acc.day) {
         acc.day = formatDate(startTimeDate, [{ dateStyle: "full" }]);

@@ -67,16 +67,16 @@ export const App = () => {
         const entry = data.data[0];
 
         setTimer({
-          ...timer,
           id: entry._id,
           startTime: entry.startTime,
           taskName: entry.name,
+          pomodoro: timer.pomodoro,
         });
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [accessToken, timer]);
+  }, [accessToken, timer.pomodoro]);
 
   function startTimer() {
     const now = new Date().toString();
@@ -96,9 +96,10 @@ export const App = () => {
       )
       .then(({ data }) => {
         setTimer({
-          ...timer,
           id: data.data._id,
           startTime: now,
+          taskName: timer.taskName,
+          pomodoro: timer.pomodoro,
         });
       })
       .catch((err) => {
@@ -122,11 +123,11 @@ export const App = () => {
       )
       .then(({ data }) => {
         setTimer({
-          ...timer,
           id: null,
           taskName: "",
           startTime: undefined,
           endTime: undefined,
+          pomodoro: timer.pomodoro,
         });
         setTimeEntries([...timeEntries, data.data]);
       });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SwitchContainer } from "../SwitchContainer/SwitchContainer";
 import Button from "@material-ui/core/Button";
 import InfoIcon from "@material-ui/icons/Info";
@@ -25,20 +25,25 @@ export const TimerFooter: React.FC<TimerFooterProps> = ({
   openDialog,
   ...timerProps
 }) => {
+  const interval = useRef<any>(null);
   const [stopwatch, setStopwatch] = useState("0:00:00");
 
   useEffect(() => {
+    console.log(timer.startTime);
     if (!timer.startTime) {
       setStopwatch("0:00:00");
       return;
     }
+
+    console.log(timer.startTime);
 
     // set stopwatch initially (instant)
     const diff = getTimeDiffInSec(timer.startTime);
     setStopwatch(formatTime(diff));
 
     // set stopwatch after 1 second, every 1 second
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
+      console.log("test");
       if (!timer.startTime) {
         setStopwatch("0:00:00");
         return;
@@ -47,6 +52,7 @@ export const TimerFooter: React.FC<TimerFooterProps> = ({
       const diff = getTimeDiffInSec(timer.startTime);
 
       if (breaks.some((sec) => diff === sec) && timer.pomodoro) {
+        console.log("OPEN");
         openDialog();
       }
 
@@ -54,7 +60,7 @@ export const TimerFooter: React.FC<TimerFooterProps> = ({
     }, 1000);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(interval.current);
     };
   }, [timer.startTime, timer.pomodoro, openDialog]);
 
